@@ -1,0 +1,112 @@
+<?php
+/**
+ * CsnUser - Coolcsn Zend Framework 2 User Module
+ * 
+ * @link https://github.com/coolcsn/CsnUser for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 LightSoft 2005 Ltd. Bulgaria
+ * @license https://github.com/coolcsn/CsnUser/blob/master/LICENSE BSDLicense
+ * @author Stoyan Cheresharov <stoyan@coolcsn.com>
+ * @author Svetoslav Chonkov <svetoslav.chonkov@gmail.com>
+ * @author Nikola Vasilev <niko7vasilev@gmail.com>
+ * @author Stoyan Revov <st.revov@gmail.com>
+ * @author Martin Briglia <martin@mgscreativa.com>
+ */
+
+?>
+
+<div class="contenedor container-fluid" style="margin-top:15px">
+<?php if($user = $this->identity()) { ?>
+  <h2 style="float:left;">
+    Bienvenido
+    <a href="<?php echo $this->url('user-register', array('action' => 'edit-profile'));?>">
+      <span class="zf-blue"><?php echo $this->escapeHtml($user->getFirstName().' '.$user->getLastName().' '.$user->getApellidoMaterno()); ?></span>
+    </a>
+  </h2>
+  <div style="clear: both"></div>
+  <div class="row">
+    
+  </div>
+<?php } else { ?>
+    <table class="table-responsive">
+      <tr>
+        <td>
+          <div>
+            <img class="img-responsive" src="<?php echo $this->basePath() ?>/public/imagenes/Logo-Medimagen.png" style="margin:0 auto;display:block">  
+          </div>
+        </td>
+        <td><h2 class="lead">Bienvenido al sistema <i><b>EXCLIE</b></i> <a href="<?php echo $this->url('user-index', array('action' => 'login'))?>"><span  style="color: #FF8C00">Inicie sesión porfavor</span></a>!</h2></td>
+      </tr>
+    </table>
+<?php } ?>
+<?php if($user = $this->identity()) { ?>
+    <div class="row">
+      <div class="row">
+      <div class="col-lg-3 col-md-6" style="margin-top: 35px">
+          <div class="panel panel-morado">
+              <div class="panel-heading">
+                  <div class="row">
+                      <div class="col-xs-3">
+                          <i class="fa fa-stethoscope fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                          <div class="huge">&nbsp;</div>
+                          <div>Estudios</div>
+                      </div>
+                  </div>
+              </div>
+              <a href="estudios/">
+                  <div class="panel-footer">
+                      <span class="pull-left">Ir </span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                  </div>
+              </a>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-6" style="margin-top: 35px">
+          <div class="panel panel-verde">
+              <div class="panel-heading">
+                  <div class="row">
+                      <div class="col-xs-3">
+                          <i class="fa fa-table fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                          <div class="huge">&nbsp;</div>
+                          <div>Agenda</div>
+                      </div>
+                  </div>
+              </div>
+              <a href="agenda/">
+                  <div class="panel-footer">
+                      <span class="pull-left">Ir </span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                  </div>
+              </a>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-6" style="margin-top: 35px">
+          <div class="panel panel-rojo">
+              <div class="panel-heading">
+                  <div class="row">
+                      <div class="col-xs-3">
+                          <i class="fa fa-list-alt fa-5x"></i>
+                      </div>
+                      <div class="col-xs-9 text-right">
+                          <div class="huge">&nbsp;</div>
+                          <div>Inventario</div>
+                      </div>
+                  </div>
+              </div>
+              <a href="inventario/">
+                  <div class="panel-footer">
+                      <span class="pull-left">Ir </span>
+                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                      <div class="clearfix"></div>
+                  </div>
+              </a>
+          </div>
+      </div>
+    </div>
+<?php } ?>
+</div>
