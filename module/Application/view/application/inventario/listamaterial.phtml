@@ -1,0 +1,79 @@
+<?php 
+	$role = $this->identity()->getRole()->getId();
+?>
+<style type="text/css">
+    .gli {
+    	color: dodgerblue;
+        float: right;
+        margin: 0 5px 0 5px;
+        cursor: pointer;
+    }
+</style>
+<div class="col-lg-12">
+	<table class="table" id="tablaInventario">
+	
+		<thead>
+			<th>Material</th>
+<<<<<<< HEAD
+			<th>Caduce</th>
+			<th>Proveedor</th>
+			<?php if($role == 7) { ?>
+			<th>Precio</th>
+			<?php } ?>
+=======
+			<th>Caducidad</th>
+			<th>Proveedor</th>
+			<th>Precio</th>
+>>>>>>> 66cfea633e0b110b65b24c5499444913323db719
+			<th>Cantidad (mín.)</th>
+			<th>Cantidad</th>
+		</thead>
+		<tbody>
+			<?php foreach ($material as $mat):  ?>
+				<tr class="fila">
+					<td> <font color="<?php if($mat['ACTIVO'] == 1) { echo "blue"; } else {echo "red";} ?>"><?php echo $mat['MATERIAL'] ?></font></td>
+					<td><?php if($mat['FECHACADUCIDAD']) { if(date_format($mat['FECHACADUCIDAD'],'d-m-Y') == '30-11--0001') { echo '00-00-0000'; } else {echo date_format($mat['FECHACADUCIDAD'],'d-m-Y');} } ?></td>
+					<td><?php echo $mat['PROVEEDOR'] ?></td>
+<<<<<<< HEAD
+					<?php if($role == 7) { ?>
+					<td><?php echo '$ '.number_format($mat['PRECIO'],2); ?></td>
+					<?php } ?>
+=======
+					<td><?php echo '$ '.number_format($mat['PRECIO'],2); ?></td>
+>>>>>>> 66cfea633e0b110b65b24c5499444913323db719
+					<td><?php echo $mat['CANTIDADMIN'] ?></td>
+					<td><?php if($mat['CANTIDAD'] <= $mat['CANTIDADMIN'] && $mat['CANTIDAD'] > 0){
+							echo '<span class="label label-warning">'.$mat['CANTIDAD'].'</span>';
+						}
+						if($mat['CANTIDAD'] > $mat['CANTIDADMIN']){
+							echo '<span class="label label-success">'.$mat['CANTIDAD'].'</span>';
+						}
+						if($mat['CANTIDAD'] <= 0){
+							echo '<span class="label label-danger">'.$mat['CANTIDAD'].'</span>';
+						}?><?php if($this->identity()->getRole()->getId() != 6) { ?><span class='glyphicon glyphicon-pencil gli' title='Editar' onclick='editarMaterial(<?php echo $mat['ID'] ?>)'></span><?php } ?></td>
+				</tr>
+			<?php endforeach ?>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#tablaInventario').dataTable({
+	    	"pageLength": 50
+	    });
+	});
+	function editarMaterial(idMaterial) {
+		$.ajax({
+            type: "GET",
+            url: "materialnuevo/"+idMaterial,
+            dataType: "html",
+            success: function(data) {
+               $("#modalMaterialNuevoBody").html(data);
+               $('#modalMaterialNuevo').modal('show');
+            },
+            error: function(){
+                  alert('Ocurrió un error, inténtelo más tarde.');
+            }
+    	});
+	}
+</script>	

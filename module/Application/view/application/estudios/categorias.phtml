@@ -1,0 +1,72 @@
+<div class="col-1g-12" style="margin-bottom:25px">
+	<button type="button" class="btn btn-primary" onclick="categoriaModal()">Nueva categoría</button>
+</div>
+<div class="col-lg-12" id="divTablaCategorias">
+	
+</div>
+
+<div class="modal fade" id="modalCategoriaNueva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+        <h4 class="modal-title" id="modalLabel">Nueva categoría</h4>
+      </div>
+      <div class="modal-body col-lg-12" id="modalCategoriaNuevaBody" style="min-height:200px">
+        
+      </div>
+      <div class="modal-footer" id="modalCategoriaNuevaFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="bEnviar" onclick="guardarCategoria()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var categoriaSeleccionada = '';
+	$(document).ready(function() {
+	    listaCategorias();
+	});
+	function categoriaModal() {
+		$('#modalCategoriaNueva').modal('show');
+		$.ajax({
+            type: "GET",
+            url: "categorianueva",
+            dataType: "html",
+            success: function(data) {
+               $('#modalCategoriaNuevaBody').html(data);
+            },
+            error: function(){
+                  alert('Ocurrió un error, inténtelo más tarde.');
+            }
+    	});
+	}
+	function listaCategorias() {	
+		$.ajax({
+            type: "GET",
+            url: "listacategorias",
+            dataType: "html",
+            success: function(data) {
+               $("#divTablaCategorias").html(data);
+            },
+            error: function(){
+                  alert('Ocurrió un error, inténtelo más tarde.');
+            }
+    	});
+	}
+  function categoriaModalEditar(cat) {
+    categoriaSeleccionada = cat;
+    $.ajax({
+            type: "GET",
+            url: "categorianueva/"+categoriaSeleccionada,
+            dataType: "html",
+            success: function(data) {
+               $("#modalCategoriaNuevaBody").html(data);
+               $('#modalCategoriaNueva').modal('show');
+            },
+            error: function(){
+                  alert('Ocurrió un error, inténtelo más tarde.');
+            }
+      });
+  }
+</script>
